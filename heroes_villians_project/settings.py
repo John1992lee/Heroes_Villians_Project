@@ -71,7 +71,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'heroes_villians_project.wsgi.application'
 
-
+REST_FRAMEWORK = {
+    'COERCE_DECIMAL_TO_STRING': False
+}
 
 
 # Password validation

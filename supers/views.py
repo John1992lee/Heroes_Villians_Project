@@ -4,11 +4,15 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import superSerializer
 from .models import super
+from super_types.models import super_type
 
 @api_view(['GET', 'POST'])
 def supers_list(request):
     if request.method == 'GET':
+        super_type_id = request.query_params.get('type')
         supers = super.objects.all()
+        if super_type_id:
+            supers = supers.filter(super_type_id__type=super_type_id)
         serializer = superSerializer(supers, many=True)
         return Response(serializer.data)
     
